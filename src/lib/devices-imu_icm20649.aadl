@@ -6,12 +6,15 @@ public
 	with Buses::SPI;
 	with Device_Property;
 	with SEI;
+	with Buses::Power;
+	
 	device IMC20649
 		features
 			DOF6: out data port Data_Types::Six_Axis.impl;
 			Temperature : out data port;
 			i2c_bus: requires bus access Buses::I2C::I2C.impl;
 			spi_bus: requires bus access Buses::SPI::SPI.impl;
+			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.02 W;};
 			DMP_int1 : out event port;
 			Wake_on_motion_int1 : out event port;
 			Pll_RDY_int1 : out event port;

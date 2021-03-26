@@ -35,9 +35,7 @@ public
 			DOF6: out data port Data_Types::Six_Axis.impl;
 			i2c_bus: requires bus access Buses::I2C::I2C.impl;
 			spi_bus: requires bus access Buses::SPI::SPI.impl;
---			power_3v3: requires bus access Buses::Power::Power_V3DC_OBDH_TTC{SEI::PowerBudget => 0.02 W;};
 			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.02 W;};
-
 		flows
 			f1: flow source DOF6 {latency => 200us .. 500us;};
 		properties
@@ -48,8 +46,6 @@ public
 			Device_property::Device_Bus_Avaliable => (SPI, I2C);
 			Device_property::Device_Support_design => (Library, API);
 			Device_property::Accelerometer_Range => (2.0g, 4.0g, 8.0g, 16.0g);
---			Device_property::Device_Max_Bus_Bandwidth => (10000.0 bitsps, 400.0 bitsps);
---			Electricity_Properties::Core_Voltage => 3.3V;
 			Device_property::Power_Consume => 0.02W;
 			Device_property::Mass => 10.0g;
 			Device_property::Device_address => ("0xE0");

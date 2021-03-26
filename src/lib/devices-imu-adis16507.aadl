@@ -1,7 +1,6 @@
 package Devices::IMU::ADIS16507
  public
-	with provant_data;
-
+	with Data_types;
 
 	with Electricity_Properties;
 
@@ -10,14 +9,17 @@ package Devices::IMU::ADIS16507
 	with Device_Property;
 
 	with SEI;
+	
+	with Buses::Power;
 
 	-------------
 	-- ADIS16480 --
 	-------------
 	device ADIS165052
 		features
-			DOF6: out data port provant_data::Six_Axis.impl;
+			DOF6: out data port Data_types::Six_Axis.impl;
 			spi_bus: requires bus access Buses::SPI::SPI.IMPL;
+			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.02 W;};
 		flows
 			f1: flow source DOF6 {latency => 305us .. 405us;};
 		properties
