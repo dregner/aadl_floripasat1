@@ -71,9 +71,9 @@ public
 --			vbus: provides bus access Buses::Power::Power_VBUS;
 --			power_solar_panels: requires bus access Buses::Power::Power_SP_MPPT;
 --			power_battery: requires bus access Buses::Power::Power_Battery;
-			power: provides bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 W;};
-			power_sp: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 2.0 W;};
-			power_bat: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 2.0 W;};
+			power: provides bus access Buses::Power::Power_Bus;--{SEI::PowerBudget => 22.2 };
+			power_sp: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 0.3 W;};
+			power_bat: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 0.3 W;};
 		properties
 			SEI::PowerCapacity => 22.2 W;
 	end battery_monitor;
@@ -135,11 +135,11 @@ public
 		features
 --			vbus: requires bus access Buses::Power::Power_VBUS{SEI::PowerBudget => 22.2 mW;};
 --			power_V3: provides bus access Buses::Power::Power_V3DC_EPS_Beacon{SEI::PowerSupply => 6.6 W;};
-			power: provides bus access Buses::Power::Power_Bus;
+			power: provides bus access Buses::Power::Power_Bus{SEI::PowerSupply => 22.2 W;};
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 		properties
 			Device_Property::Temperature_Operation => (-40.0 C, 125.0 C);
---			SEI::PowerCapacity => 6.6w;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 2.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;
@@ -157,7 +157,7 @@ public
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 		properties
 			Device_Property::Temperature_Operation => (-40.0 C, 125.0 C);
---			SEI::PowerCapacity => 6.6w;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 2.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;
@@ -176,7 +176,7 @@ public
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 		properties
 			Device_Property::Temperature_Operation => (-40.0 C, 125.0 C);
---			SEI::PowerCapacity => 15.0 W;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 3.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;
@@ -191,11 +191,11 @@ public
 			enable_in: in event port;
 --			vbus: requires bus access Buses::Power::Power_VBUS{SEI::PowerBudget => 22.2 mW;};
 --			power_V3: provides bus access Buses::Power::Power_V3DC_OBDH_TTC;--{SEI::PowerSupply => 3.3 W;};
-			power: provides bus access Buses::Power::Power_Bus;
+			power: provides bus access Buses::Power::Power_Bus;--	{SEI::PowerBudget => 22.2 mW;};
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 		properties
 			Device_Property::Temperature_Operation => (-40.0 C, 125.0 C);
---			SEI::PowerCapacity => 3.3 W;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 1.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;
@@ -213,7 +213,7 @@ public
 			power: provides bus access Buses::Power::Power_Bus;
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 		properties
---			SEI::PowerCapacity => 16.5W;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 5.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;
@@ -227,10 +227,10 @@ public
 			enable_in: in event port;
 --			vbus: requires bus access Buses::Power::Power_VBUS{SEI::PowerBudget => 22.2 mW;};
 --			power_V3: provides bus access Buses::Power::Power_V3DC_PA_Beacon;--{SEI::PowerSupply => 16.5 W;};
-			power: provides bus access Buses::Power::Power_Bus;
+			power: provides bus access Buses::Power::Power_Bus;--{SEI::PowerBudget => 22.2 mW;};
 			power_vbus: requires bus access Buses::Power::Power_Bus{SEI::PowerBudget => 22.2 mW;};		
 			properties
---				SEI::PowerCapacity => 16.5W;
+			SEI::PowerCapacity => 22.2w;
 			Electricity_Properties::Idle_Current => 5.0 A;
 			Electricity_Properties::VIH_min => 5.0 V;
 			Electricity_Properties::VOL_max => 3.3 V;

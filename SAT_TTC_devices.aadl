@@ -17,7 +17,6 @@ public
 			spi_bus: requires bus access Buses::SPI::SPI.impl;
 --			power_V3: requires bus access Buses::Power::Power_V3DC_EPS_Beacon{SEI::PowerBudget => 0.01023W;};
 			power_V3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01023W;};
-			radio_bus: requires bus access Buses::Radio::Radio.impl;
 		properties
 			Electricity_Properties::Idle_Current => 23.680mA;
 			Electricity_Properties::Input_Voltage => 3.3V;	
@@ -52,6 +51,7 @@ public
 --			power_pa_ttc: requires bus access Buses::Power::Power_V3DC_PA_TTC{SEI::PowerBudget => 0.01916 W;};
 			power_pa_ttc: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01916 W;};
 			power_pa_beacon: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01916 W;};
+			power: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 44.55 mW;};
 			spi_bus: requires bus access Buses::SPI::SPI.impl;
 			radio_bus: requires bus access Buses::Radio::Radio.impl;
 			mcu_data: in data port; -- spi connection to mcu

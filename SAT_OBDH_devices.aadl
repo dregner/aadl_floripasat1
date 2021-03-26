@@ -111,7 +111,7 @@ public
 			signal_in: in data port;
 			bus_ADC: requires bus access Buses::Analog::Analog;
 --			power_3v3: requires bus access Buses::Power::Power_V3DC_OBDH_TTC{SEI::PowerBudget => 1.5 W;};
-			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 1.5 W;};
+			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 500.0 mW;};
 		properties
 			Device_Property::Power_Consume => 1.5 W; -- 300 mA RMS (5V)
 			Electricity_Properties::Idle_Current => 300.0 mA;
