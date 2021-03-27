@@ -1,89 +1,78 @@
 package SAT_TTC_devices
 public
 	with Buses::Radio;
-	with Physical;
-	with common_devices;
 	with SEI;
+	with Buses::I2C;
+	with Buses::UART;
+	with Buses::SPI;
+	with Buses::Power;
+	with Electricity_Properties;
+	with Physical;
+	with Device_Property;
 
-	processor MCU_ttc extends common_devices::MSP430F6659
+	processor MSP430F6659
 		features
-			radio_bus: requires bus access Buses::Radio::Radio.impl;
-	end MCU_ttc;
-
-	processor implementation MCU_ttc.impl
-
-	end MCU_ttc.impl;
-
-	-- Main radio (transceiver)
-	device main_radio
-		features
-			obds_radio_data: in data port; -- bus4
-			radio_signals: out data port; -- bus7
-	end main_radio;
-
-	device implementation main_radio.impl
+			i2c_bus: requires bus access Buses::I2C::I2C.impl;
+			uart_bus: requires bus access Buses::UART::UART.impl;
+			spi_bus: requires bus access Buses::SPI::SPI.impl;
+--			power_V3: requires bus access Buses::Power::Power_V3DC_EPS_Beacon{SEI::PowerBudget => 0.01023W;};
+			power_V3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01023W;};
 		properties
-			Data_Rate => 1 MBytesps; -- (max) (transmission)
-			Physical::Voltage => 5.0V; --(input)
-	end main_radio.impl;
+			Electricity_Properties::Idle_Current => 23.680mA;
+			Electricity_Properties::Input_Voltage => 3.3V;	
+			Electricity_Properties::Run_Current => 23.680mA; -- 370 uA/MHz (max 20 MHz)
+			Clock_Period => 50ns; -- 20 MHz(max)
+			Physical::Voltage => 3.6V; --(max) 1.6 V (min)		
+			Device_Property::Power_Consume => 0.01023W; -- Max: 0.01023, min: 0.5115 mW
+	end MSP430F6659;
 
-	-- Antena mcu
-	processor MCU_antenna extends common_devices::MSP430F6659
+	processor implementation MSP430F6659.impl
+		subcomponents
+			RAM: memory mcu_RAM;
+			Non_Vol: memory mcu_nonVolatile;
+
+	end MSP430F6659.impl;
+
+	--MCU memories
+	memory mcu_RAM
+		properties
+			SEI::RAMCapacity => 66.0 kByte;
+	end mcu_RAM;
+
+	memory mcu_nonVolatile
+		properties
+			Memory_Size => 512 kByte;
+	end mcu_nonVolatile;
+
+	-- Transceiver for Main Radio and Beacon Radio
+	device RF4463F30
 		features
+--			power_pa_beacon: requires bus access Buses::Power::Power_V3DC_PA_Beacon{SEI::PowerBudget => 0.01916 W;};
+--			power_pa_ttc: requires bus access Buses::Power::Power_V3DC_PA_TTC{SEI::PowerBudget => 0.01916 W;};
+			power_pa_ttc: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01916 W;};
+			power_pa_beacon: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01916 W;};
+			power: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 44.55 mW;};
+			spi_bus: requires bus access Buses::SPI::SPI.impl;
 			radio_bus: requires bus access Buses::Radio::Radio.impl;
-	end MCU_antenna;
-
-	---- Antenna
-	device Antenna
-
-	end Antenna;
-
-	device implementation antenna.impl
-	end antenna.impl;
-
-	-- Beacon radio
-	device beacon_radio
-		features
-			mcu_data_in: in data port; -- especificar melhor
-			beacon_message: out data port; -- bus7
-			current: out data port; -- current read for EPS
-			eps_data_in: in data port; -- Data receive from EPS	
+			mcu_data: in data port; -- spi connection to mcu
 		properties
 			Clock_Period => 685ps;
-			SEI::PowerCapacity => 1.0 W;
-			
-	end beacon_radio;
+			Communication_Properties::Data_Rate => 1 MBytesps;
+--			SEI::PowerCapacity => 1.0W;
+	end RF4463F30;
 
-	device implementation beacon_radio.impl
+	-- Antenna
+	device Antenna
+		features
+			radio_bus: requires bus access Buses::Radio::Radio.impl;
+--			power_antenna: requires bus access Buses::Power::Power_V3DC_Antenna{SEI::PowerBudget => 2.5 W;};
+			power_antenna: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 2.5 W;};
+			i2c_bus: requires bus access Buses::I2C::I2C.impl;
 		properties
-			Data_Rate => 1 MBytesps; -- (max) (transmission)
-			Physical::Voltage => 5.0V; --(input)
-	end beacon_radio.impl;
---	
---		-- BUSes
---	
---		-- BUS3: OBDH uC <-> TTC MCU
---	bus BUS3
---		
---	end BUS3;
---		
---		-- BUS4: OBDH <-> Main Radio
---	bus BUS4
---		
---	end BUS4;
---	
---		-- BUS5: TTC MCU <-> Antenna MUC 2
---	bus BUS5
---		
---	end BUS5;
---		
---		-- BUS6: EPS <-> TTC MCU
---	bus BUS6
---		
---	end BUS6;
---	
---		-- BUS7: Main Radio and Beacon Ratio <-> Antennas
---	bus BUS7
---		
---	end BUS7;
+			SEI::GrossWeight => 0.0445kg;
+	end Antenna;
+
+	device implementation Antenna.impl
+	end Antenna.impl;
+
 end SAT_TTC_devices;

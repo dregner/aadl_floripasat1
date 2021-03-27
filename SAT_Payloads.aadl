@@ -1,35 +1,52 @@
 package SAT_Payloads
 public
 	with Buses::I2C, Buses::UART;
-	
+	with Buses::Power;
+	with SEI;
+
 	-- Payload from RUSH
 	processor RUSH_payload
 		features
 			data_out: out data port;
 			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
+--		  power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
+			power_bus: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 2.0 W;};
+    properties
+			SEI::GrossWeight => 0.067kg;
+
 	end RUSH_payload;
-	
+
 	processor implementation RUSH_payload.impl
 	end RUSH_payload.impl;
-	
+
 	-- Payload from Joinville
 	processor Joinville_Payload
 		features
 			data_out: out data port;
-			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;		
+			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
+--			power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
+      power_bus: requires bus access Buses::Power::Power_bus;
+    properties
+			SEI::GrossWeight => 0.125kg;
+
 	end Joinville_Payload;
-	
+
+
 	processor implementation Joinville_Payload.impl
-		
+
 	end Joinville_Payload.impl;
-	
+
 	processor FS_Interface
 		features
-			uart_bus: requires bus access Buses::UART::UART.impl;		
+			uart_bus: requires bus access Buses::UART::UART.impl;
+--			power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
+			power_bus: requires bus access Buses::Power::Power_bus;
+		properties
+			SEI::GrossWeight => 0.021kg;
 	end FS_Interface;
-	
+
 	processor implementation FS_Interface.impl
-		
+
 	end FS_Interface.impl;
 	
 end SAT_Payloads;
