@@ -2,7 +2,7 @@ package Devices::IMU::LSM303
 public
 	with Buses::I2C;
 
-	with provant_data;
+	with SAT_data;
 
 	with Electricity_Properties;
 
@@ -11,11 +11,14 @@ public
 	with SEI;
 
 	with Bus_Properties;
+	
+	with Buses::Power;
 
 	device LSM303
 		features
-			DOF9: out data port provant_data::Nine_Axis.impl;
+			DOF9: out data port SAT_data::Nine_Axis.impl;
 			i2c_bus: requires bus access Buses::I2C::I2C.impl;
+			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.02 W;};
 		flows
 			f1: flow source DOF9 {latency => 200us .. 300us;};
 		properties

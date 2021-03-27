@@ -1,17 +1,19 @@
 package Devices::IMU::ICM20948
 public
 	with Buses::I2C;
-	with provant_data;
+	with Data_types;
 	with Electricity_Properties;
 	with Buses::SPI;
 	with SEI;
 	with Device_Property;
+	with Buses::Power;
 
 	device ICM20948
 		features
-			DOF6: out data port provant_data::Six_Axis.impl;
+			DOF6: out data port Data_Types::Six_Axis.impl;
 			i2c_bus: requires bus access Buses::I2C::I2C.impl;
 			spi_bus: requires bus access Buses::SPI::SPI.impl;
+			power_3v3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.02 W;};
 			DMP_int1 : out event port;
 			Wake_on_motion_int1 : out event port;
 			Pll_RDY_int1 : out event port;
@@ -31,7 +33,6 @@ public
 			Device_property::Device_Software => (DitigalFilter, Power_Management, FusionData);
 			Device_property::Device_Application => (Drone, Wearable);
 			Device_property::Device_Bus_Avaliable => (SPI, I2C);
-			Device_property::Device_Max_Bus_Bandwidth => (7000.0 KBytesps, 400.0 KBytesps);
 			Device_property::Mass => 10.0g;
 			Device_property::Device_Noise_Accelerometer => 250.0 ug_sqrHz;
 			Device_property::Device_Noise_gyroscope => 8.0 mdps_sqrHz;
