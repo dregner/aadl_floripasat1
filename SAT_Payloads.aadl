@@ -9,10 +9,11 @@ public
 		features
 			data_out: out data port;
 			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
---			power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
-			power_bus: requires bus access Buses::Power::Power_bus;
-		properties
+--		  power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
+			power_bus: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 2.0 W;};
+    properties
 			SEI::GrossWeight => 0.067kg;
+
 	end RUSH_payload;
 
 	processor implementation RUSH_payload.impl
@@ -24,10 +25,12 @@ public
 			data_out: out data port;
 			i2c_bus: requires bus access Buses::I2C::I2C.IMPL;
 --			power_bus: requires bus access Buses::Power::Power_V5DC_Payloads;
-			power_bus: requires bus access Buses::Power::Power_bus;
-		properties
+      power_bus: requires bus access Buses::Power::Power_bus;
+    properties
 			SEI::GrossWeight => 0.125kg;
+
 	end Joinville_Payload;
+
 
 	processor implementation Joinville_Payload.impl
 
@@ -40,7 +43,6 @@ public
 			power_bus: requires bus access Buses::Power::Power_bus;
 		properties
 			SEI::GrossWeight => 0.021kg;
-
 	end FS_Interface;
 
 	processor implementation FS_Interface.impl
