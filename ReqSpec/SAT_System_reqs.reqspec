@@ -1,0 +1,10 @@
+system requirements SAT_system_reqs for SAT_system::FloripaSAT [
+	requirement R1: "Weight Limit" [
+		val weightMax = 1068 g
+
+		description "The weight of the device 
+			shall not exceed "
+			weightMax
+			
+	]
+]
