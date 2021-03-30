@@ -1,6 +1,5 @@
 package SAT_TTC_process
 public
-	with Buses::SPI, Buses::I2C, Buses::UART;
 	
 	-- PROCESS MSP
 

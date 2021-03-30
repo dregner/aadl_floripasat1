@@ -69,4 +69,4 @@ public
 	device implementation BNO55.impl
 	end BNO55.impl;
   
-  end Devices::IMU::BNO0555;
+  end Devices::IMU::BNO055;

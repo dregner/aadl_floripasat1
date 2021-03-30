@@ -1,6 +1,5 @@
 package Devices::IMU::IMU_GY955
 public
-	with Buses::I2C;
 
 	with SAT_data;
 

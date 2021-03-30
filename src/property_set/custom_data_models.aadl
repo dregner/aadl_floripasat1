@@ -5,4 +5,4 @@ property set Custom_Data_Models is
       applies to ( data );
       
     Number_Representation : enumeration (Signed, Unsigned) applies to ( data, feature );
-end Data_Model;	
+end Custom_Data_Models;	

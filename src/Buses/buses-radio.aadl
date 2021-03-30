@@ -1,6 +1,5 @@
 package Buses::Radio
 public
-	with SEI;
 
 	bus Radio
 		features
