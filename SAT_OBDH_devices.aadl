@@ -10,7 +10,7 @@ public
 	-- Flash memory
 	memory sd_card
 		features
-			spi_bus: requires bus access Buses::SPI::SPI.impl;
+			spi_bus: provides bus access Buses::SPI::SPI.impl;
 		properties
 			Memory_Size => 2 GByte;
 	end sd_card;
@@ -121,9 +121,12 @@ public
 
 	processor MSP430F6659
 		features
-			i2c_bus: requires bus access Buses::I2C::I2C.impl;
+			i2c_bus_0: requires bus access Buses::I2C::I2C.impl; -- EPS, Payloads
+			i2c_bus_1: provides bus access Buses::I2C::I2C.impl; -- IMUs
+			i2c_bus_2: provides bus access Buses::I2C::I2C.impl; -- Antenna Deployment System
 			uart_bus: requires bus access Buses::UART::UART.impl;
-			spi_bus: requires bus access Buses::SPI::SPI.impl;
+			spi_bus_0: requires bus access Buses::SPI::SPI.impl; -- Main Radio
+			spi_bus_1: requires bus access Buses::SPI::SPI.impl; -- SD Card, memories and Solar Pan.			
 --			power_V3: requires bus access Buses::Power::Power_V3DC_OBDH_TTC{SEI::PowerBudget => 0.01023 W;};
 			power_V3: requires bus access Buses::Power::Power_bus{SEI::PowerBudget => 0.01023 W;};
 

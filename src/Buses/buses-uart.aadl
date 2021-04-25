@@ -16,7 +16,7 @@ public
 		properties
 			Bus_Properties::Available_Bandwidth => (9_600 Bytesps, 19_200 Bytesps, 38_400 Bytesps, 57_600 Bytesps,
 						115_200 Bytesps);
-			Bus_Properties::Bandwidth => 115_200 bitsps;
+			Bus_Properties::Bandwidth => 9_600 bitsps;
 			Latency => 1Ms .. 1Ms;
 			Transmission_Time => [Fixed => 10ms .. 30ms;
 						PerByte => 1us .. 10us;];

@@ -30,6 +30,62 @@ public
 	process implementation mcu.impl
 				
 	end mcu.impl;
+	
+	thread reset_watchdog_timers
+		features
+			reset_data_1: in event port;
+			reset_data_2: in event port;
+		properties
+			Period => 100 ms;
+	end reset_watchdog_timers;
+		
+	thread ground_communication
+--		features
+--			spi_bus: requires bus access Buses::SPI::SPI.impl;
+		properties
+			Period => 100 ms;
+	end ground_communication;
+	
+	thread housekeeping
+		features
+			temp_in: in data port;
+			syst_status: in event port;
+			update_timer: out event port;
+		properties
+			Period => 100 ms;
+	end housekeeping;
+	
+	thread store_data
+--		features
+--			spi_bus: requires bus access Buses::SPI::SPI.impl;
+	end store_data;
+	
+--This task is responsible to trade messages with the EPS module.
+--This communication is done over I2C protocol. The purpose of this message could be:
+--sensors data trading, notify to each other about its current status,
+--do handshaking about some necessary shutdown, among others integration commands.	
+	thread eps_interface
+		
+	end eps_interface;
+--This task is responsible to trade messages with the Beacon module. 
+--This communication is done over SPI protocol, implemented in software.
+--The purpose of the messages could be: send some data to be transmitted along 
+--Beacon signal, warn Beacon MCU about a Shutdown command or request antenna usage	
+	thread beacon_interface
+		
+	end beacon_interface;
+--Read the 2 on-board IMUs. Each IMU has a 3-axis Accelerometer
+-- 3-axis Gyroscope, 3-axis Magnetometer and 1 temperature sensor. 
+--This data is necessary to allow the Attitude Control in ADCS module. 
+--The both IMU are in an I2C bus.
+	thread imu_interface
+		
+	end imu_interface;
+	
+	thread solar_panel_interface
+		
+	end solar_panel_interface;
+	
 end SAT_OBDH_process;
 
 --		mcu_obdh: processor SAT_OBDH_devices::mcu;

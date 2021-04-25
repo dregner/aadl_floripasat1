@@ -94,7 +94,7 @@ public
 			DC_Payloads: device SAT_EPS_devices::TPS5430;
 
 			-- MCU of EPS
-			mcu_eps: processor SAT_EPS_devices::MSP430F6659;
+			mcu_eps: processor SAT_EPS_devices::MSP430F6659.impl;
 			EPS_firmware: process SAT_EPS_process::EPS_firmware.impl;
 
 			JTAG_BUS: bus Buses::UART::UART.impl;

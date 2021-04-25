@@ -10,7 +10,7 @@ public
 			Latency => 1Ms .. 1Ms;
 			Transmission_Time => [Fixed => 10ms .. 30ms;
 						PerByte => 1us .. 10us;];
-			Bus_Properties::Bandwidth => 100_000 bitsps;
+			Bus_Properties::Bandwidth => 400_000 bitsps;
 			Data_Size => 1 Bytes;
 			
 	end SPI;

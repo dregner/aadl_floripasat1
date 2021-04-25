@@ -71,16 +71,14 @@ public
 			
 			-- COM Device <-> Processor
 			
-			Vc_1a: bus access mcu_obdh.i2c_bus -> i2c_bus;
-			Vc_1b: bus access imu_1.i2c_bus <-> i2c_bus;
-			Vc_1c: bus access imu_2.i2c_bus <-> i2c_bus;
-			Vc_2a: bus access sd_card.spi_bus <-> spi_bus;
-			Vc_2b: bus access mcu_obdh.spi_bus <-> spi_bus;
-			Vc_0: bus access  mcu_obdh.i2c_bus -> BUS0;
-			Vc_1: bus access mcu_obdh.spi_bus -> BUS1;
-			Vc_2: bus access  mcu_obdh.i2c_bus -> BUS2;
-			Vc_3: bus access mcu_obdh.spi_bus -> BUS3;
-			Vc_4: bus access mcu_obdh.spi_bus -> BUS4;
+			Vc_1a: bus access mcu_obdh.i2c_bus_1 <-> imu_1.i2c_bus;
+			Vc_1b: bus access mcu_obdh.i2c_bus_1 <-> imu_2.i2c_bus;
+			Vc_2b: bus access mcu_obdh.spi_bus_1 <-> sd_card.spi_bus;
+			Vc_0: bus access  mcu_obdh.i2c_bus_0 -> BUS0;
+			Vc_1: bus access mcu_obdh.spi_bus_1 <-> BUS1;
+			Vc_2: bus access  mcu_obdh.i2c_bus_0 -> BUS2;
+			Vc_3: bus access mcu_obdh.spi_bus_0 <-> BUS3;
+			Vc_4: bus access mcu_obdh.spi_bus_0 -> BUS4;
 			Vc_8: bus access mcu_obdh.uart_bus -> BUS_JTAG;
 			
 			
